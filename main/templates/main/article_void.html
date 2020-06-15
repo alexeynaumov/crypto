@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="row h-100 align-items-center justify-content-center">
+    <div class="col-4">
+       <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Boooom!</h5>
+            <p class="card-text">No results matching your query :(</p>
+              <div class="row align-items-center justify-content-center">
+                  <div class="col text-center">
+                      <a href="{% url 'main:query-create' %}" class="btn btn-light">Try again</a>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

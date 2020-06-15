@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+{% endblock %}
+
+{% block body %}
+<div class="row h-100 justify-content-center">
+    <div class="col-8 my-auto">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group mb-2">
+                <label for="query">Query</label>
+                <input type="text" class="form-control" id="query" name="query" required>
+                <small id="query_help" class="form-text text-muted">Keywords or phrases to search for in the article title and body</small>
+            </div>
+
+            <div class="form-group mb-2">
+                <label for="sources">Sources</label>
+                <input type="text" class="form-control" id="sources" name="sources">
+                <small id="sources_help" class="form-text text-muted">A comma-seperated string of identifiers (maximum 20) for the news sources or blogs you want headlines from</small>
+            </div>
+
+            <div class="form-group mb-2">
+                <label for="domains">Domains</label>
+                <input type="text" class="form-control" id="domains" name="domains">
+                <small id="domains_help" class="form-text text-muted">A comma-seperated string of domains (eg bbc.co.uk, techcrunch.com, engadget.com) to restrict the search to</small>
+            </div>
+
+            <div class="form-row mb-2">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="from_date">From</label>
+                        <div class="input-group date" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" id="from_date" name="from_date" data-target="#from_date"/>
+                            <div class="input-group-append" data-target="#from_date" data-toggle="datetimepicker">
+                                <div class="input-group-text">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <small id="from_date_help" class="form-text text-muted">A date for the oldest article allowed</small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="to_date">To</label>
+                        <div class="input-group date"  data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" id="to_date" name="to_date" data-target="#to_date"/>
+                            <div class="input-group-append" data-target="#to_date" data-toggle="datetimepicker">
+                                <div class="input-group-text">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <small id="to_date_help" class="form-text text-muted">A date for the newest article allowed</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-2">
+                <label for="language">Language</label>
+                <select class="form-control" id="language" name="language">
+                    <option value="ar">Arabic</option>
+                    <option value="de">German</option>
+                    <option selected value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">Franch</option>
+                    <option value="he">Hebrew</option>
+                    <option value="it">Italian</option>
+                    <option value="nl">Dutch</option>
+                    <option value="no">Norwegian</option>
+                    <option value="pt">Portuguese</option>
+                    <option value="ru">Russian</option>
+                    <option value="se">Swedish</option>
+                    <option value="zh">Chinese</option>
+                </select>
+                <small id="language_help" class="form-text text-muted">The language you want to get headlines for</small>
+            </div>
+
+            <div class="form-group mb-2">
+                <label for="sotring">Sorting</label>
+                <select class="form-control" id="sotring" name="sorting">
+                    <option selected value="publishedAt">Publishing time</option>
+                    <option value="relevancy">Relevancy</option>
+                    <option value="popularity">Popularity</option>
+                </select>
+                <small id="sotring_help" class="form-text text-muted">The order to sort the articles in</small>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-light">Search</button>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#from_date').datetimepicker({
+                format: 'L'
+            });
+            $('#to_date').datetimepicker({
+                format: 'L'
+            });
+        });
+    </script>
+</div>
+{% endblock %}
